@@ -1,0 +1,40 @@
+zh-CN:
+  micro_erp: "企业管理系统"
+  system_setting: "系统设置"
+  back_to_admin_list: "返回管理员列表"
+  no_destroy_on_default_admin_user: "缺省的管理员用户不能被删除"
+  no_destroy_on_current_admin_user: "当前的管理员用户不能被删除"
+  active_admin:
+    sidebars:
+      help: "帮助"  
+  activerecord:
+    models:
+      admin_user: 
+        one: "管理员"
+        other: "管理员"
+    attributes:
+      admin_user:
+        email: "电子邮件"
+        password: "密码"
+        current_sign_in_at: "当前登录时间"
+        role:  "角色"
+        user_name: "用户名"
+        last_sign_in_at:  "最近一次登录时间"
+        sign_in_count:  "登录次数"
+        login: 登录名
+  role:
+    SUPER_ADMIN: "超级管理员"        
+    ADMIN:   "管理员"
+    DEV: "研发"
+    FIN: "财务" 
+    PLM: "产品经理"
+    SALES: "销售"
+    MATERIAL_CONTROLLER: "物料专员"
+    POST_SALES: "售后服务"
+    OTHER: "其他"
+  errors:
+    messages:    
+      destroy_fails_if_lastone: 最后一个系统管理员不能被删除    
+  devise:
+    failure:
+      invalid: 登录名（用户名或邮箱）或密码错误      

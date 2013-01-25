@@ -1,0 +1,17 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  micro_erp: "SOHO ERP"
+  system_setting: "System Setting"
+  back_to_admin_list: "Back to Admin User List"
+  role:
+    SUPER_ADMIN: "SUPER_ADMIN"
+    ADMIN:  "ADMIN"
+    DEV: "DEVELOPER"
+    FIN: "FINANCE" 
+    PLM: "PLM"
+    SALES: "SALES"
+    MATERIAL_CONTROLLER: "MATERIAL_CONTROLLER"
+    POST_SALES: "POST_SALES"
+    OTHER: "OTHER"  
