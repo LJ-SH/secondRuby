@@ -43,3 +43,7 @@ gem 'activeadmin'
 gem 'enum_column3'
 
 #gem 'RedCloth' # to faciliate rake doc:guides execution only
+
+gem 'jquery-ui-rails'
+
+gem 'cancan'

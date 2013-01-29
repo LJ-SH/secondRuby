@@ -9,13 +9,15 @@ ActiveAdmin.register AdminUser do
     column :role do |admin_user|
         translated_role(admin_user)
     end    
-    column :last_sign_in_at           
+    column :last_sign_in_at
     column :sign_in_count        
     default_actions                   
   end                                 
 
+  filter :user_name  
   filter :email
-  filter :user_name         
+  filter :last_sign_in_at
+  # TODO filter :last_sign_in_at, :as => :string, :input_html => {:class => "hasDatetimePicker"}
 
   form do |f|                         
     f.inputs "Admin Details" do       
@@ -23,7 +25,12 @@ ActiveAdmin.register AdminUser do
       f.input :email                  
       f.input :password               
       f.input :password_confirmation  
-      f.input :role, :as => :select, :collection => ROLE_DEFINITION.map { |r| [I18n.t("role.#{r}"),r]}
+      if current_admin_user.role? :SUPER_ADMIN
+        f.input :role, :as => :select, :collection => ROLE_DEFINITION.map { |r| [I18n.t("role.#{r}"),r]}
+      elsif current_admin_user.role? :ADMIN
+        f.input :role, :as => :select, :collection => ROLE_DEFINITION[1..8].map { |r| [I18n.t("role.#{r}"),r]}
+      end
+      f.form_buffers.last # bypass the bug where no field will be shown if the unless condition is not satisfied
     end                               
     f.actions                         
   end               
@@ -38,7 +45,6 @@ ActiveAdmin.register AdminUser do
         translated_role(admin_user)
       end
       row :user_name      
-      #action_item
     end
   end        
 
@@ -72,9 +78,16 @@ ActiveAdmin.register AdminUser do
     end
 
     def update
+      # enable the account modification without password update
       if params[:admin_user][:password].blank?
         params[:admin_user].delete("password")
         params[:admin_user].delete("password_confirmation")
+      end
+      # enable new role assignment shall not higher than the current user
+      unless current_admin_user.role? params[:admin_user][:role].to_sym
+          flash[:notice] = t(:insufficient_permission_on_role_assignment)
+          redirect_to :action => :edit
+          return
       end
       super # call original destory method
     end
