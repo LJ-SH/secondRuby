@@ -26,6 +26,8 @@ zh-CN:
         last_sign_in_at:  "最近一次登录时间"
         sign_in_count:  "登录次数"
         tlogin: 登录名
+        organization:  公司名
+        telephone:  电话号码
   role:
     :SUPER_ADMIN: "超级管理员"        
     :ADMIN:   "管理员"

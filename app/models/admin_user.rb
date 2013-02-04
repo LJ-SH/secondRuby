@@ -10,7 +10,7 @@ class AdminUser < ActiveRecord::Base
   attr_accessible :tlogin
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :role, :user_name
+  attr_accessible :email, :password, :password_confirmation, :role, :user_name, :telephone, :organization
 
   # TODO Enable MetaSearch to act as a string on DateTime fields
   search_methods :last_sign_in_at_contains
@@ -19,6 +19,7 @@ class AdminUser < ActiveRecord::Base
   validates :user_name, :uniqueness => true,  :presence => { :case_sensitive => false }
   validates :email, :uniqueness => true, :presence => { :case_sensitive => false }
   validates :password, :presence => { :case_sensitive => false }, :on => :create
+  validates_format_of :telephone, :with => /^1[35]\d{9}$|^((0\d{2,3})-)(\d{7,8})(-(\d{3,}))?$/
 
   def prevent_if_lastone
   	if AdminUser.count < 4

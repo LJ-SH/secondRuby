@@ -9,13 +9,16 @@ ActiveAdmin.register AdminUser do
     column :role do |admin_user|
         translated_role(admin_user)
     end    
+    column :organization
+    column :telephone
     column :last_sign_in_at
-    column :sign_in_count        
+    #column :sign_in_count        
     default_actions                   
   end                                 
 
   filter :user_name  
   filter :email
+  filter :organization
   filter :last_sign_in_at
   # TODO filter :last_sign_in_at, :as => :string, :input_html => {:class => "hasDatetimePicker"}
 
@@ -25,11 +28,11 @@ ActiveAdmin.register AdminUser do
       f.input :email                  
       f.input :password               
       f.input :password_confirmation  
-      if current_admin_user.role? :SUPER_ADMIN
-        f.input :role, :as => :select, :collection => ROLE_DEFINITION.map { |r| [I18n.t("role.#{r}"),r]}
-      elsif current_admin_user.role? :ADMIN
-        f.input :role, :as => :select, :collection => ROLE_DEFINITION[1..8].map { |r| [I18n.t("role.#{r}"),r]}
+      if current_admin_user.has_roles?([:SUPER_ADMIN, :ADMIN])
+        f.input :role, :as => :select, :collection => ROLE_DEFINITION.dup.drop_while{|x| x>current_admin_user.role}.map { |r| [I18n.t("role.#{r}"),r]}
+        f.input :organization
       end
+      f.input :telephone
       f.form_buffers.last # bypass the bug where no field will be shown if the unless condition is not satisfied
     end                               
     f.actions                         
@@ -37,14 +40,16 @@ ActiveAdmin.register AdminUser do
 
   show do |admin_user|
     attributes_table do
+      row :user_name      
       row :email                     
       #row :current_sign_in_at        
-      row :last_sign_in_at           
-      row :sign_in_count       
+      #row :sign_in_count       
       row :role do 
         translated_role(admin_user)
       end
-      row :user_name      
+      row :organization
+      row :telephone      
+      row :last_sign_in_at           
     end
   end        
 
@@ -84,10 +89,12 @@ ActiveAdmin.register AdminUser do
         params[:admin_user].delete("password_confirmation")
       end
       # enable new role assignment shall not higher than the current user
-      unless current_admin_user.role? params[:admin_user][:role].to_sym
-          flash[:notice] = t(:insufficient_permission_on_role_assignment)
-          redirect_to :action => :edit
-          return
+      if params[:admin_user][:role]
+        unless current_admin_user.role? params[:admin_user][:role].to_sym
+            flash[:notice] = t(:insufficient_permission_on_role_assignment)
+            redirect_to :action => :edit
+            return
+        end
       end
       super # call original destory method
     end
