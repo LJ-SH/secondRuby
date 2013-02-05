@@ -8,4 +8,6 @@
 AdminUser.create! do |a|
   a.email = 'admin@example.com'
   a.password = a.password_confirmation = 'password'
+  a.role = :SUPER_ADMIN
+  a.user_name = "SUPER_ADMIN"
 end
