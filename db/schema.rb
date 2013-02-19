@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130204134453) do
+ActiveRecord::Schema.define(:version => 20130217075649) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -50,6 +50,27 @@ ActiveRecord::Schema.define(:version => 20130204134453) do
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
   add_index "admin_users", ["user_name"], :name => "index_admin_users_on_user_name", :unique => true
+
+  create_table "category_second_levels", :force => true do |t|
+    t.string   "category_encoding"
+    t.string   "category_name"
+    t.string   "category_comment"
+    t.string   "updated_by_email"
+    t.integer  "category_top_level_id"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
+  create_table "category_top_levels", :force => true do |t|
+    t.string   "category_encoding"
+    t.string   "category_name"
+    t.string   "category_comment"
+    t.string   "updated_by_email"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "category_top_levels", ["category_encoding"], :name => "index_category_top_levels_on_category_encoding"
 
   create_table "users", :force => true do |t|
     t.string   "name"

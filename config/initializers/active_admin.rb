@@ -148,4 +148,6 @@ ActiveAdmin.setup do |config|
   #
   # Set the CSV builder options (default is {})
   # config.csv_options = {}
+
+  config.default_per_page = 10
 end

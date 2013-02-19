@@ -1,0 +1,7 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  2nd_level_id: 1
+
+two:
+  2nd_level_id: 1

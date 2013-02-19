@@ -5,8 +5,7 @@ class AdminUser < ActiveRecord::Base
   devise :database_authenticatable, 
          :recoverable, :rememberable, :trackable, :validatable, :authentication_keys => [:tlogin]
 
-  # add virtual attribute to provide login flexbility (username or email)
-  attr_accessor :tlogin     
+  # add virtual attribute to provide login flexbility (username or email)    
   attr_accessible :tlogin
 
   # Setup accessible (or protected) attributes for your model
@@ -18,11 +17,12 @@ class AdminUser < ActiveRecord::Base
   before_destroy :prevent_if_lastone
   validates :user_name, :uniqueness => true,  :presence => { :case_sensitive => false }
   validates :email, :uniqueness => true, :presence => { :case_sensitive => false }
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
   validates :password, :presence => { :case_sensitive => false }, :on => :create
-  validates_format_of :telephone, :with => /^1[35]\d{9}$|^((0\d{2,3})-)(\d{7,8})(-(\d{3,}))?$/
+  validates_format_of :telephone, :with => /^1[35]\d{9}$|^((0\d{2,3})-)(\d{7,8})(-(\d{3,}))?$/, :allow_blank => true 
 
   def prevent_if_lastone
-  	if AdminUser.count < 4
+  	if AdminUser.count < 2
       errors.add(:base, :destroy_fails_if_lastone)
       false # or errors.blank?
   	end

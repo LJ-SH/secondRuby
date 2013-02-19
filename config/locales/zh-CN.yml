@@ -1,6 +1,9 @@
 zh-CN:
+# system level defintion
   micro_erp: "企业管理系统"
   system_setting: "系统设置"
+# active_admin application definition  
+  admin_user_edit_table_title: "用户详细信息"
   back_to_admin_list: "返回管理员列表"
   no_destroy_on_default_admin_user: "缺省的管理员用户不能被删除"
   no_destroy_on_current_admin_user: "当前的管理员用户不能被删除"
@@ -13,8 +16,14 @@ zh-CN:
   activerecord:
     models:
       admin_user: 
-        one: "管理员"
-        other: "管理员"
+        one: "用户管理"
+        other: "用户管理"
+      category_top_level:
+        one: '一级元器件分类'
+        other: '元器件分类'       
+      category_second_level:
+        one: '二级元器件分类'
+        other: '元器件分类 - 二级'       
     attributes:
       admin_user:
         email: "电子邮件"
@@ -28,6 +37,19 @@ zh-CN:
         tlogin: 登录名
         organization:  公司名
         telephone:  电话号码
+      category_top_level:
+        category_name: 一级分类名称
+        category_comment: 一级分类备注
+        updated_by_email: 最近更新帐号
+        updated_at:  更新时间
+        category_encoding: 一级分类编码(2位数字)
+      category_second_level:
+        category_name: 二级分类名称
+        category_comment: 二级分类备注
+        updated_by_email: 最近更新帐号
+        updated_at:  更新时间
+        category_encoding: 二级分类编码(2位数字)      
+        category_top_level: 一级分类 
   role:
     :SUPER_ADMIN: "超级管理员"        
     :ADMIN:   "管理员"
@@ -43,4 +65,86 @@ zh-CN:
       destroy_fails_if_lastone: 最后一个系统管理员不能被删除    
   devise:
     failure:
-      invalid: 登录名（用户名或邮箱）或密码错误      
+      invalid: 登录名（用户名或邮箱）或密码错误  
+# model category related definition
+  category_top_level_edit_table_title: 一级分类详细信息
+  #next_level: 下一级分类
+  level_1st_name: 一级分类名称
+  level_1st_id:  一级分类编码
+  level_1st_comment: 一级分类备注
+  level_2nd_name: 二级分类名称
+  level_2nd_id:  二级分类编码
+  level_2nd_comment: 二级分类备注  
+  category_updated_at: 最新一次更新时间
+  category_updated_by: 最近一次更新帐号
+  category_actions: 操作
+  category_1st_comment:  
+    'level_1st_comment_81':  阻容，芯片，接插件
+    'level_1st_comment_82':  PCB，屏蔽罩，天线及自己的现有产品等
+    'level_1st_comment_83':  包装盒等
+    'level_1st_comment_84':  螺丝等
+    'level_1st_comment_85':  屏，机壳等
+    'level_1st_comment_86':  充电器，电池，电线电缆 
+    'level_1st_comment_87':  预留
+    'level_1st_comment_88':  预留
+    'level_1st_comment_89':  临时料号
+  category_1st_name:
+    'Electrical Materials':  电子料
+    'Custom Parts':  定制件
+    'Package':  包装件
+    'Fastener':  紧固件
+    'Structural Parts': 结构件
+    'Charger and Accessories':  充电器、电池、电线电缆
+    'Reserve 1':  预留1
+    'Reserve 2':  预留2
+    'Temporary Parts':  临时料号      
+  category_2nd_name:
+    'Resistance':  电阻
+    'Capacitance':  电容
+    'Inductance':  电感
+    'Power Class Devices':  电源类器件
+    'Baseband IC':  基带芯片
+    'RF TxRv IC':  射频收发芯片
+    'RF PA and Switches':  射频功放和开关
+    'Filter':  滤波器
+    'Crystal':  晶振
+    'Transistor':  晶体管
+    'Memory':  存储器
+    'Connector':  连接器
+    'Audio Devices':  音频器件
+    'Other ICs':  芯片
+    'Non RF Switches':  非射频开关
+    'Fuse':  保险丝
+    'ESD & EMI Filter':  ESD & EMI 滤波器
+    'Reserve 1':  预留1
+    'Dielectric Antenna':  介质天线
+    'Modules':  模组
+    'PCB':  PCB
+    'Shielding Box': 屏蔽罩屏蔽框
+  category_2nd_comment:
+    'level_2nd_comment_81_01': 电阻
+    'level_2nd_comment_81_02': 电容
+    'level_2nd_comment_81_03': 电感
+    'level_2nd_comment_81_04': ''
+    'level_2nd_comment_81_05': '' 
+    'level_2nd_comment_81_06': ''
+    'level_2nd_comment_81_07': '' 
+    'level_2nd_comment_81_08': ''
+    'level_2nd_comment_81_09': '' 
+    'level_2nd_comment_81_10': ''
+    'level_2nd_comment_81_11': '' 
+    'level_2nd_comment_81_12': ''
+    'level_2nd_comment_81_13': '' 
+    'level_2nd_comment_81_14': ''
+    'level_2nd_comment_81_15': '' 
+    'level_2nd_comment_81_16': '' 
+    'level_2nd_comment_81_17': ''
+    'level_2nd_comment_81_18': '' 
+    'level_2nd_comment_81_19': ''
+    'level_2nd_comment_81_20': '' 
+    'level_2nd_comment_82_01': ''
+    'level_2nd_comment_82_02': ''
+    'level_2nd_comment_82_03': ''     
+  active_admin:
+    sidebars:
+      upper_category_information: "上级分类信息"

@@ -29,10 +29,10 @@ class Ability
     if user.role? :SUPER_ADMIN
       can :manage, :all 
     elsif user.role? :ADMIN
-      can :manage, :all, :role => ROLE_DEFINITION[1..8]
+      can :manage, AdminUser, :role => ROLE_DEFINITION[1..8]
+      can :manage, [CategoryTopLevel, CategorySecondLevel]
     elsif user.has_roles?(ROLE_DEFINITION[2..7])
       can [:read, :update], AdminUser, :id => user.id
-
     else # OTHER role
       can :read, AdminUser, :id => user.id
       #can :update, AdminUser, [:password]

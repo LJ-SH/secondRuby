@@ -23,7 +23,7 @@ ActiveAdmin.register AdminUser do
   # TODO filter :last_sign_in_at, :as => :string, :input_html => {:class => "hasDatetimePicker"}
 
   form do |f|                         
-    f.inputs "Admin Details" do       
+    f.inputs I18n.t 'admin_user_edit_table_title' do       
       f.input :user_name
       f.input :email                  
       f.input :password               
