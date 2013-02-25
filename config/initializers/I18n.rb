@@ -1,5 +1,5 @@
 #encoding: utf-8
-I18n.locale = "zh-CN".to_sym
+I18n.default_locale = "zh-CN".to_sym
 
 LANGUAGES = [
   ['English', 'en'],

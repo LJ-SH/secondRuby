@@ -1,7 +1,14 @@
 zh-CN:
+  formtastic:
+    :create: "新建%{model}"
+    :update: "更新%{model}"
+    :submit: '提交 %{model}'
+    :cancel: '取消'
+    :reset: '复位 %{model}'
+    :required: '必选'
 # system level defintion
   micro_erp: "企业管理系统"
-  system_setting: "系统设置"
+  system_setting: 系统设置
 # active_admin application definition  
   admin_user_edit_table_title: "用户详细信息"
   back_to_admin_list: "返回管理员列表"
@@ -18,12 +25,18 @@ zh-CN:
       admin_user: 
         one: "用户管理"
         other: "用户管理"
-      category_top_level:
+      category1st:
         one: '一级元器件分类'
         other: '元器件分类'       
-      category_second_level:
+      category2nd:
         one: '二级元器件分类'
-        other: '元器件分类 - 二级'       
+        other: '二级元器件分类'       
+      category3rd:
+        one: '三级元器件分类'
+        other: '三级元器件分类' 
+      category4th:
+        one: '四级元器件分类'
+        other: '四级元器件分类' 
     attributes:
       admin_user:
         email: "电子邮件"
@@ -37,19 +50,37 @@ zh-CN:
         tlogin: 登录名
         organization:  公司名
         telephone:  电话号码
-      category_top_level:
+      category1st:
         category_name: 一级分类名称
         category_comment: 一级分类备注
         updated_by_email: 最近更新帐号
         updated_at:  更新时间
-        category_encoding: 一级分类编码(2位数字)
-      category_second_level:
+        category_encoding: 分类编码(2位数字)  
+        actions:  操作    
+      category2nd:
         category_name: 二级分类名称
         category_comment: 二级分类备注
         updated_by_email: 最近更新帐号
         updated_at:  更新时间
-        category_encoding: 二级分类编码(2位数字)      
-        category_top_level: 一级分类 
+        category_encoding: 分类编码(2位数字)      
+        category1st: 一级分类（编码）
+        actions:  操作         
+      category3rd:
+        category_name: 三级分类名称
+        category_comment: 三级分类备注
+        updated_by_email: 最近更新帐号
+        updated_at:  更新时间
+        category_encoding: 分类编码(2位数字)      
+        category2nd: 二级分类（编码）   
+        category1st: 一级分类（编码）        
+        actions:  操作         
+      category4th:
+        category_name: 四级分类名称
+        category_comment: 四级分类备注
+        updated_by_email: 最近更新帐号
+        updated_at:  更新时间
+        category_encoding: 分类编码(2位数字)                  
+        actions:  操作         
   role:
     :SUPER_ADMIN: "超级管理员"        
     :ADMIN:   "管理员"
@@ -67,17 +98,11 @@ zh-CN:
     failure:
       invalid: 登录名（用户名或邮箱）或密码错误  
 # model category related definition
-  category_top_level_edit_table_title: 一级分类详细信息
-  #next_level: 下一级分类
-  level_1st_name: 一级分类名称
-  level_1st_id:  一级分类编码
-  level_1st_comment: 一级分类备注
-  level_2nd_name: 二级分类名称
-  level_2nd_id:  二级分类编码
-  level_2nd_comment: 二级分类备注  
-  category_updated_at: 最新一次更新时间
-  category_updated_by: 最近一次更新帐号
-  category_actions: 操作
+  category_form_edit_table_title: 分类详细信息 
+  category_1st_info: 一级分类（编码）
+  category_2nd_info: 二级分类（编码） 
+  category_3rd_info: 三级分类（编码）  
+  back_to_category_list: "返回当前分类列表"
   category_1st_comment:  
     'level_1st_comment_81':  阻容，芯片，接插件
     'level_1st_comment_82':  PCB，屏蔽罩，天线及自己的现有产品等
@@ -145,6 +170,22 @@ zh-CN:
     'level_2nd_comment_82_01': ''
     'level_2nd_comment_82_02': ''
     'level_2nd_comment_82_03': ''     
+  category_3rd_name:
+    'Chip Resistors':  贴片电阻
+    'Varistors':  压敏电阻
+    'Thermistors':  热敏电阻
+    'Pumping Resistors':  排阻
+    '0.5% High Precision Resistors':  '0.5%高精度电阻'
+    '1% High Precision Resistors':  1%高精度电阻
+    'High Power Resistors':  大功率电阻
+    'SMD Ceramic Capacitors - 0201 Package':  '贴片陶瓷电容-0201封装'
+    'SMD Ceramic Capacitors - 0402 Package':  '贴片陶瓷电容-0402封装'
+    'SMD Ceramic Capacitors - 0603 Package':  '贴片陶瓷电容-0603封装'
+    'SMD Ceramic Capacitors - 0805 Package':  '贴片陶瓷电容-0805封装'
+    'SMD Ceramic Capacitors - 1206 Package':  '贴片陶瓷电容-1206封装'
+    'Chip Tantalum Capacitors':  贴片钽电容
+    'Aluminum Electrolytic Capacitors':  铝电解电容
+    'Back-upBattery/ESD/EMI Capacitors':  '后备电池/ESD/EMI电容'
   active_admin:
     sidebars:
-      upper_category_information: "上级分类信息"
+      associate_category_information: "相关分类信息" 

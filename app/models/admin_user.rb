@@ -5,7 +5,8 @@ class AdminUser < ActiveRecord::Base
   devise :database_authenticatable, 
          :recoverable, :rememberable, :trackable, :validatable, :authentication_keys => [:tlogin]
 
-  # add virtual attribute to provide login flexbility (username or email)    
+  # add virtual attribute to provide login flexbility (username or email)
+  attr_accessor :tlogin     
   attr_accessible :tlogin
 
   # Setup accessible (or protected) attributes for your model
@@ -32,8 +33,12 @@ class AdminUser < ActiveRecord::Base
     roles.include?(self.role)
   end
 
-  def role?(base_role)
+  def high_rank?(base_role)
     ROLE_DEFINITION.index(base_role) >= ROLE_DEFINITION.index(self.role)
+  end
+
+  def role? (role)
+    ROLE_DEFINITION.index(role) == ROLE_DEFINITION.index(self.role)
   end
 
   def is_current_admin_user?(current_admin_user)

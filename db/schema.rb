@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130217075649) do
+ActiveRecord::Schema.define(:version => 20130224171748) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -51,17 +51,7 @@ ActiveRecord::Schema.define(:version => 20130217075649) do
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
   add_index "admin_users", ["user_name"], :name => "index_admin_users_on_user_name", :unique => true
 
-  create_table "category_second_levels", :force => true do |t|
-    t.string   "category_encoding"
-    t.string   "category_name"
-    t.string   "category_comment"
-    t.string   "updated_by_email"
-    t.integer  "category_top_level_id"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
-  end
-
-  create_table "category_top_levels", :force => true do |t|
+  create_table "category1sts", :force => true do |t|
     t.string   "category_encoding"
     t.string   "category_name"
     t.string   "category_comment"
@@ -70,7 +60,41 @@ ActiveRecord::Schema.define(:version => 20130217075649) do
     t.datetime "updated_at",        :null => false
   end
 
-  add_index "category_top_levels", ["category_encoding"], :name => "index_category_top_levels_on_category_encoding"
+  add_index "category1sts", ["category_encoding"], :name => "index_category1sts_on_category_encoding"
+
+  create_table "category2nds", :force => true do |t|
+    t.string   "category_encoding"
+    t.string   "category_name"
+    t.string   "category_comment"
+    t.string   "updated_by_email"
+    t.integer  "category1st_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  create_table "category3rds", :force => true do |t|
+    t.string   "category_encoding"
+    t.string   "category_name"
+    t.string   "category_comment"
+    t.string   "updated_by_email"
+    t.integer  "category2nd_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "category3rds", ["category2nd_id"], :name => "index_category3rds_on_category2nd_id"
+
+  create_table "category4ths", :force => true do |t|
+    t.string   "category_encoding"
+    t.string   "category_name"
+    t.string   "category_comment"
+    t.string   "updated_by_email"
+    t.integer  "category3rd_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "category4ths", ["category3rd_id"], :name => "index_category4ths_on_category3rd_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"

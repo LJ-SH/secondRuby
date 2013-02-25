@@ -1,0 +1,24 @@
+<% context.instance_eval  do 
+  column :category_name, :sortable => :id do |c|
+    if c.nextLevelCategory.nil?
+      c.category_name
+    elsif
+      div :class => ('highlighted' unless c.nextLevelCategory.empty?) do      
+        link_to c.category_name, c.nextCategoryIndexUrl(c)
+      end
+    end
+  end       
+  column :category_encoding, :sortable => false
+  column :category_comment                     
+  column :updated_at
+  column :updated_by_email   
+  #default_actions
+  if can?(:manage, collection.class)
+  column :actions do |c|
+    links = ''.html_safe
+    links += link_to I18n.t('active_admin.edit'), edit_resource_path(c), :class => "member_link edit_link"
+    links += link_to I18n.t('active_admin.delete'), resource_path(c), :method => :delete, :confirm => I18n.t('active_admin.delete_confirmation'), :class => "member_link delete_link"
+    links
+  end
+  end
+end %>  

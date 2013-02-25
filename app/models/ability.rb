@@ -30,48 +30,18 @@ class Ability
       can :manage, :all 
     elsif user.role? :ADMIN
       can :manage, AdminUser, :role => ROLE_DEFINITION[1..8]
-      can :manage, [CategoryTopLevel, CategorySecondLevel]
-    elsif user.has_roles?(ROLE_DEFINITION[2..7])
+      can :manage, [Category1st, Category2nd, Category3rd, Category4th]
+    elsif user.role? :MATERIAL_CONTROLLER
       can [:read, :update], AdminUser, :id => user.id
+      can :manage, [Category1st, Category2nd, Category3rd, Category4th]
     else # OTHER role
       can :read, AdminUser, :id => user.id
+      can :read, [Category1st, Category2nd, Category3rd, Category4th]
       #can :update, AdminUser, [:password]
     end
 
-    
-    #user ||= AdminUser.new
-    #case user.role
-    #    when :SUPER_ADMIN
-    #      can :manage, :all    
-    #    when :ADMIN
-    #      can :manage, :all, :role => ROLE_DEFINITION[1..9] # 9 is the size of ROLE_DEFINITION
-    #    when :DEV
-    #      can [:read, :update], AdminUser, :id => user.id
-    #      #can [:read, :update], AdminUser, :id => self.id, :role => :MATERIAL_CONTROLLER
-    #    when :FIN
-    #      can [:read, :update], AdminUser, :id => user.id
-    #    when :PLM
-    #      can [:read, :update], AdminUser, :id => user.id
-    #    when :SALES
-    #      can [:read, :update], AdminUser, :id => user.id
-    #    when :MATERIAL_CONTROLLER
-    #      can [:read, :update], AdminUser, :id => user.id
-    #      cannot :update, AdminUser, :attribute => "role"
-    #    when :POST_SALES
-    #      can [:read, :update], AdminUser, :id => user.id
-    #    when :OTHER 
-    #      cannot :manage, :all
-    #end
-
-    #user ||= AdminUser.new
-    #if user.has_role?([:SUPER_ADMIN])
-    #  can :manage, :all 
-    #elsif user.has_role?([:ADMIN])
-    #  can :manage, :all, :role => ROLE_DEFINITION[1..8]
-    #elsif user.has_role?(ROLE_DEFINITION[2..7])
-    #  can [:read, :update], AdminUser, :id => user.id
-    #else # OTHER role
-    #  can :read, AdminUser, :id => user.id
-    #end
+    if user.has_roles?(ROLE_DEFINITION[2..7])
+      can [:read, :update], AdminUser, :id => user.id    
+    end 
   end
 end

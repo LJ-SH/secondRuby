@@ -1,5 +1,5 @@
 ActiveAdmin.register AdminUser do  
-  menu :parent => I18n.t(:system_setting)
+  menu :parent => I18n.t('system_setting')
 
   index do               
     selectable_column             
@@ -53,13 +53,13 @@ ActiveAdmin.register AdminUser do
     end
   end        
 
-  action_item :only => :show do 
-    link_to I18n.t('back_to_admin_list'), :action => :index
-  end   
-
   #batch_action :destroy, :if => proc { can?( :destroy, Post ) } do |selection|
   #  redirect_to collection_path, :alert => "Didn't really delete these!"
   #end  
+
+  sidebar 'back_to_index_list', :only => :show do |c|
+    link_to I18n.t('back_to_admin_list'), :action => :index
+  end  
 
   controller do 
     def destroy
@@ -90,7 +90,7 @@ ActiveAdmin.register AdminUser do
       end
       # enable new role assignment shall not higher than the current user
       if params[:admin_user][:role]
-        unless current_admin_user.role? params[:admin_user][:role].to_sym
+        unless current_admin_user.high_rank? params[:admin_user][:role].to_sym
             flash[:notice] = t(:insufficient_permission_on_role_assignment)
             redirect_to :action => :edit
             return

@@ -31,3 +31,8 @@
 // add to combine datetime picker with active_admin
 /*= require jquery.ui.all */
 /*= require jquery-ui-timepicker-addon.css */
+
+div.highlighted a:link, div.highlighted a:visited{
+  color	:#0f0f0f;
+  font-weight :bold
+}

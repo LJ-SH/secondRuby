@@ -1,4 +1,20 @@
 MicroErp::Application.routes.draw do
+  # namespace :admin do 
+  #  resources :category1sts do 
+  #    resources :category2nds 
+  #  end
+  # end  
+
+  namespace :admin do
+    resources :category1sts do
+      resources :category2nds do
+        resources :category3rds do
+          resources :category4ths
+        end
+      end
+    end
+  end
+
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config

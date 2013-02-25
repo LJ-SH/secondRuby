@@ -124,15 +124,7 @@ ActiveAdmin.setup do |config|
   # Active Admin resources and pages from here.
   #
   # config.before_filter :do_something_awesome
-
-  # == Register Stylesheets & Javascripts
-  #
-  # We recommend using the built in Active Admin layout and loading
-  # up your own stylesheets / javascripts to customize the look
-  # and feel.
-  #
-  # To load a stylesheet:
-  #   config.register_stylesheet 'my_stylesheet.css'
+  config.before_filter :set_admin_locale 
 
   # You can provide an options hash for more control, which is passed along to stylesheet_link_tag():
   #   config.register_stylesheet 'my_print_stylesheet.css', :media => :print
@@ -150,4 +142,9 @@ ActiveAdmin.setup do |config|
   # config.csv_options = {}
 
   config.default_per_page = 10
+
+  private 
+  def set_admin_locale
+    I18n.locale ||= I18n.default_locale
+  end
 end
