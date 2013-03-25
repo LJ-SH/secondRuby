@@ -47,3 +47,5 @@ gem 'enum_column3'
 gem 'jquery-ui-rails'
 
 gem 'cancan'
+
+gem 'ancestry'

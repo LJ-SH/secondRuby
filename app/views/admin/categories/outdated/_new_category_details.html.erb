@@ -1,0 +1,10 @@
+<%= semantic_form_for new_admin_category_url do |f| %>
+	<%=f.inputs :sel_category_type do %>
+		<%= f.input :category_type, :as => :select, :collection => COMPONENT_CATEGORY_DEFINITION.map { |r| [r,r]} %>
+    <% end %>
+    <%= f.inputs :category_details do  %>
+    	<%= f.input :name %>
+    	<%= f.input :level1, :as => :select, :collection => Category.level1.map{|c| [c.name, c.level1]}, :include_blank => false %>
+    <% end %>
+
+<% end %>  

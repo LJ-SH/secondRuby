@@ -17,8 +17,8 @@ class Category2nd < ActiveRecord::Base
 	  "#{category_name}(#{category_encoding})"
 	end
 
-	def nextLevelCategory
-		self.category3rds.all
+	def anyNextLevelCategory?
+		self.category3rds.any?
 	end
 
 	def nextCategoryIndexUrl(c)

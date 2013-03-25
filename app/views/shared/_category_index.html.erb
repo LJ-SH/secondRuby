@@ -1,9 +1,9 @@
 <% context.instance_eval  do 
   column :category_name, :sortable => :id do |c|
-    if c.nextLevelCategory.nil?
+    if c.anyNextLevelCategory?.nil?
       c.category_name
     elsif
-      div :class => ('highlighted' unless c.nextLevelCategory.empty?) do      
+      div :class => ('highlighted' if c.anyNextLevelCategory?) do      
         link_to c.category_name, c.nextCategoryIndexUrl(c)
       end
     end

@@ -1,7 +1,7 @@
 ActiveAdmin.register Category1st do
   config.batch_actions = false
   menu :parent => I18n.t('system_setting')
-  controller.authorize_resource
+  #controller.authorize_resource
   config.sort_order = "id_asc"
 
   index do    
@@ -17,7 +17,7 @@ ActiveAdmin.register Category1st do
   end
 
   filter :category_name
-  filter :updated_by_email, :as => :select, :collection => proc {email_list=[] | (Category1st.all).collect {|c| c.updated_by_email}}
+  filter :updated_by_email, :as => :select, :collection => proc {Category1st.uniq.pluck(:updated_by_email)}
   filter :updated_at
 
   sidebar 'associate_category_information', :only => :show do |c|
@@ -35,7 +35,7 @@ ActiveAdmin.register Category1st do
     end
 
     def create
-      update! do |success, failure|
+      create! do |success, failure|
         success.html { return redirect_to url_for(:action => 'index')}
         failure.html { render active_admin_template('new') }
       end
@@ -101,4 +101,5 @@ end
   #  end
   #end
 
+  #filter :updated_by_email, :as => :select, :collection => proc {email_list=[] | (Category1st.all).collect {|c| c.updated_by_email}}
 

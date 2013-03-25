@@ -1,0 +1,18 @@
+<%= form_for @search, url: collection_path, as: :q, builder: ActiveAdmin::Filters::FormBuilder, html: {method: :get, class: :filter_form} do |f| %>
+ 
+  <%= f.filter :name, as: :string
+      f.filter :level1, as: :select, :collection => level1_collection
+
+      f.form_buffers.last %>
+
+  <%= content_tag :div, :class => "buttons" do %>
+    <%=  f.submit I18n.t('active_admin.filter') %>
+    <%=  link_to(I18n.t('active_admin.clear_filters'), "#", :class => "clear_filters_btn") %>
+    <%=  hidden_field_tags_for(params, :except => [:q, :page]) %>
+  <% end %>
+
+<% end %>
+
+  <%= semantic_form_for("category_sel", :url=> category_type_admin_categories_url, :remote => true) do |f| %>
+  
+  <% end %>  

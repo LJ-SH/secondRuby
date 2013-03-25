@@ -1,0 +1,24 @@
+<li>
+	<%= label "category", I18n.t("activerecord.attributes.category.name"), :class => "label" %>
+	<%= text_field "category", "name"%>
+</li>
+<li>
+	<%= label "category", I18n.t("activerecord.attributes.category.comment"), :class => "label" %>
+	<%= text_field "category", "comment"%>
+</li>
+<li>
+	<%= label "category", I18n.t("activerecord.attributes.category.level1"), :class => "label" %>
+	<%= select "category", "level1", options_for_select(Category.level1.map{|r| [r.name, r.level1]}), :include_blank => true %>
+</li>
+<li>
+	<%= label "category", I18n.t("activerecord.attributes.category.level2"), :class => "label" %>
+	<%= select "category", "level2", options_for_select([I18n.t('category_sel_tip_option')]), :include_blank => true %>
+</li>
+<li>
+	<%= label "category", I18n.t("activerecord.attributes.category.level3"), :class => "label" %>
+	<%= select "category", "level3", options_for_select([I18n.t('category_sel_tip_option')])%>
+</li>
+<li>
+	<%= label "category", I18n.t("activerecord.attributes.category.level4"), :class => "label" %>
+	<%= text_field "category", "level4", :value => '00'%>
+</li>

@@ -1,0 +1,54 @@
+<%= semantic_form_for [:admin, @category] do |f| %>
+	<%=f.inputs :sel_category_type do %>
+		<%= f.input :category_type, :as => :select, :collection => COMPONENT_CATEGORY_DEFINITION.map { |r| [I18n.t("category.#{r}"),r]} %>
+        <%= f.input :updated_by_email, :wrapper_html => { :style => "display:none;" } %>
+    <% end %>
+    <%= f.inputs :category_details, :id => "new_category_details" do %>
+        <% if f.object.category_type == :CATEGORY_LEVEL1 %>
+        	<%= f.input :name %>
+            <%= f.input :comment %>
+            <%= f.input :level1 %>
+            <%= f.input :level2, :wrapper_html => { :style => "display:none;" }  %>
+            <%= f.input :level3, :wrapper_html => { :style => "display:none;" } %>
+            <%= f.input :level4, :wrapper_html => { :style => "display:none;" } %>                                    
+        <% elsif f.object.category_type == :CATEGORY_LEVEL2 %>
+            <%= f.input :name %>
+            <%= f.input :comment %>
+            <%= f.input :level1, :as => :select, :collection => Category.level1.map{|r| [r.name, r.level1]}  %>
+            <%= f.input :level2 %>    
+            <%= f.input :level3, :wrapper_html => { :style => "display:none;" } %>
+            <%= f.input :level4, :wrapper_html => { :style => "display:none;" } %>  
+        <% elsif f.object.category_type == :CATEGORY_LEVEL3 %>
+            <%= f.input :name %>
+            <%= f.input :comment %>
+            <%= f.input :level1, :as => :select, :collection => Category.level1.map{|r| [r.name, r.level1]}  %>
+            <% if f.object.level1.blank? %>
+                <%= f.input :level2, :as => :select, :collection => I18n.t('category_sel_tip_option') %>
+            <% else %>
+                <%=f.input :level2, :as => :select, :collection => Category.level2.where(:level1 => f.object.level1).map{|r| [r.name, r.level2]} %>
+            <% end %>
+            <%= f.input :level3 %>
+            <%= f.input :level4, :wrapper_html => {:style => "display:none;"} %>      
+        <% elsif f.object.category_type == :CATEGORY_LEVEL4 %>
+            <%= f.input :name %>
+            <%= f.input :comment %>
+            <%= f.input :level1, :as => :select, :collection => Category.level1.map{|r| [r.name, r.level1]}  %>
+            <% if f.object.level1.blank? %>
+                <%= f.input :level2, :as => :select, :collection => I18n.t('category_sel_tip_option') %>
+            <% else %>
+                <%=f.input :level2, :as => :select, :collection => Category.level2.where(:level1 => f.object.level1).map{|r| [r.name, r.level2]} %>
+            <% end %>
+            <% if f.object.level2.blank? || f.object.level1.blank? %>
+                <%= f.input :level3, :as => :select, :collection => I18n.t('category_sel_tip_option') %>
+            <% else %>
+                <%=f.input :level3, :as => :select, :collection => Category.level3.where(:level1 => f.object.level1, :level2 => f.object.level2).map{|r| [r.name, r.level3]} %>
+            <% end %>
+            <%= f.input :level4 %>                                      
+        <% end %>
+     <% end %>
+    <%= f.actions do %>
+    <%=	f.action :submit %>
+    	<li class="cancel"> <%=link_to "Cancel", category_collection_with_scope(f.object.category_type) %></li>
+    <% end %>
+<% end %>
+

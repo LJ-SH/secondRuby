@@ -1,0 +1,1 @@
+<%= select_tag :q_level2, options_from_collection_for_select(@level2, 'id', 'name'), :'data-remote' => 'true', :'data-url' => url_for(:controller => 'listings', :action => 'submit_major_category', format: 'js') %>

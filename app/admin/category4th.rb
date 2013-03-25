@@ -16,7 +16,7 @@ ActiveAdmin.register Category4th do
   end
 
   filter :category_name
-  filter :updated_by_email, :as => :select, :collection => proc {[] | Category4th.all.collect {|c| c.updated_by_email}}
+  filter :updated_by_email, :as => :select, :collection => proc {Category4th.uniq.pluck(:updated_by_email)}
   filter :updated_at  
 
   sidebar 'associate_category_information' do

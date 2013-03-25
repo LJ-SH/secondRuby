@@ -16,7 +16,7 @@ class Category4th < ActiveRecord::Base
 	  "#{category_name}(#{category_encoding})"
 	end
 
-	def nextLevelCategory
+	def anyNextLevelCategory?
 		nil
 	end
 

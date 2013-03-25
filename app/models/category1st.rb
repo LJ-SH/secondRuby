@@ -8,7 +8,8 @@ class Category1st < ActiveRecord::Base
 	attr_accessible :category_name, :category_encoding, :category_comment, :updated_by_email
 
 	validates :category_encoding, :uniqueness => true,  :presence => true
-	validates_format_of :category_encoding, :with => /^\d{2}$/
+	# A common pitfall in Ruby’s regular expressions is to match the string’s beginning and end by ^ and $, instead of \A and \z.
+	validates_format_of :category_encoding, :with => /\A\d{2}$\z/ 
 	validates :category_name, :uniqueness => true,  :presence => { :case_sensitive => false }
 	validates_format_of :updated_by_email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
 
@@ -17,8 +18,8 @@ class Category1st < ActiveRecord::Base
 	  "#{category_name}(#{category_encoding})"
 	end
 
-	def nextLevelCategory
-		self.category2nds.all
+	def anyNextLevelCategory?
+		self.category2nds.any?
 	end
 
 	def nextCategoryIndexUrl(c)

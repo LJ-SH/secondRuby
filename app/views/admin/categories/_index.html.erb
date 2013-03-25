@@ -1,0 +1,15 @@
+<% context.instance_eval  do
+  column :name do |c|
+    index_name_helper(c,level)
+  end 
+  column I18n.t("PARENT_CATEGORY") do |c|
+    index_parent_helper(c,level)
+  end unless level == 'level1'
+  column I18n.t("CODE") do |c|
+    index_code_helper(c,level)
+  end 
+  column :comment                     
+  column :updated_by_email
+  column :updated_at
+  default_actions
+end %>  

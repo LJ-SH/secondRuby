@@ -30,7 +30,7 @@ class Ability
       can :manage, :all 
     elsif user.role? :ADMIN
       can :manage, AdminUser, :role => ROLE_DEFINITION[1..8]
-      can :manage, [Category1st, Category2nd, Category3rd, Category4th]
+      can :manage, [Category1st, Category2nd, Category3rd, Category4th, Category]
     elsif user.role? :MATERIAL_CONTROLLER
       can [:read, :update], AdminUser, :id => user.id
       can :manage, [Category1st, Category2nd, Category3rd, Category4th]

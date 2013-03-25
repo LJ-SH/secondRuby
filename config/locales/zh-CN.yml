@@ -6,6 +6,9 @@ zh-CN:
     :cancel: '取消'
     :reset: '复位 %{model}'
     :required: '必选'
+    titles:
+      sel_category_type: 选择分类级别
+      category_details:  填写分类详细信息
 # system level defintion
   micro_erp: "企业管理系统"
   system_setting: 系统设置
@@ -17,9 +20,6 @@ zh-CN:
   insufficient_permission_on_role_assignment: "用户权限设置超限"
   login_hint: 请输入用户名或者电子邮件
   password_hint: 请输入密码
-  active_admin:
-    sidebars:
-      help: "帮助"
   activerecord:
     models:
       admin_user: 
@@ -27,16 +27,16 @@ zh-CN:
         other: "用户管理"
       category1st:
         one: '一级元器件分类'
-        other: '元器件分类'       
+        other: '一级元器件分类'       
       category2nd:
         one: '二级元器件分类'
         other: '二级元器件分类'       
       category3rd:
         one: '三级元器件分类'
         other: '三级元器件分类' 
-      category4th:
-        one: '四级元器件分类'
-        other: '四级元器件分类' 
+      category:
+        one: '元器件分类'
+        other: '元器件分类' 
     attributes:
       admin_user:
         email: "电子邮件"
@@ -80,7 +80,18 @@ zh-CN:
         updated_by_email: 最近更新帐号
         updated_at:  更新时间
         category_encoding: 分类编码(2位数字)                  
-        actions:  操作         
+        actions:  操作        
+      category:
+        name: 分类名称
+        comment: 分类备注
+        updated_by_email: 最近更新帐号
+        updated_at:  更新时间
+        category_type:  分类类型
+        level1: 一级分类(2位数字)
+        level2: 二级分类(2位数字)
+        level3: 三级分类(2位数字)  
+        level4: 四级分类(2位数字)               
+        actions:  操作
   role:
     :SUPER_ADMIN: "超级管理员"        
     :ADMIN:   "管理员"
@@ -91,6 +102,11 @@ zh-CN:
     :MATERIAL_CONTROLLER: "物料专员"
     :POST_SALES: "售后服务"
     :OTHER: "其他"
+  category:
+    :CATEGORY_LEVEL1: 一级分类
+    :CATEGORY_LEVEL2: 二级分类
+    :CATEGORY_LEVEL3: 三级分类
+    :CATEGORY_LEVEL4: 四级分类            
   errors:
     messages:    
       destroy_fails_if_lastone: 最后一个系统管理员不能被删除    
@@ -98,7 +114,9 @@ zh-CN:
     failure:
       invalid: 登录名（用户名或邮箱）或密码错误  
 # model category related definition
-  category_form_edit_table_title: 分类详细信息 
+  CODE: 分类编码 
+  PARENT_CATEGORY: 父级分类信息
+  category_sel_tip_option: 请选择分类类型 
   category_1st_info: 一级分类（编码）
   category_2nd_info: 二级分类（编码） 
   category_3rd_info: 三级分类（编码）  
@@ -188,4 +206,10 @@ zh-CN:
     'Back-upBattery/ESD/EMI Capacitors':  '后备电池/ESD/EMI电容'
   active_admin:
     sidebars:
+      help: "帮助"    
       associate_category_information: "相关分类信息" 
+    scopes:
+      level1: 一级分类
+      level2: 二级分类      
+      level3: 三级分类
+      level4: 四级分类 
