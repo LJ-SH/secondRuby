@@ -1,5 +1,5 @@
 ActiveAdmin.register AdminUser do  
-  menu :parent => I18n.t('system_setting')
+  #menu :parent => I18n.t('system_setting')
 
   index do               
     selectable_column             

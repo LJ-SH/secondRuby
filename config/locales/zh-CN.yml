@@ -9,6 +9,13 @@ zh-CN:
     titles:
       sel_category_type: 选择分类级别
       category_details:  填写分类详细信息
+  helpers:
+    label:
+      component_category:
+        level0: '一级分类'
+        level1: 二级分类
+        level2: 三级分类
+        level3: 四级分类
 # system level defintion
   micro_erp: "企业管理系统"
   system_setting: 系统设置
@@ -37,6 +44,9 @@ zh-CN:
       category:
         one: '元器件分类'
         other: '元器件分类' 
+      component_category:
+        one: '元件分类'
+        other: '元件分类'        
     attributes:
       admin_user:
         email: "电子邮件"
@@ -92,6 +102,19 @@ zh-CN:
         level3: 三级分类(2位数字)  
         level4: 四级分类(2位数字)               
         actions:  操作
+      component_category:
+        name: 分类名称
+        comment: 分类备注
+        updated_by_email: 最近更新帐号
+        updated_at:  更新时间
+        category_type:  分类类型
+        level0: 一级分类(2位数字)
+        level1: 二级分类(2位数字)
+        level2: 三级分类(2位数字)  
+        level3: 四级分类(2位数字)               
+        actions:  操作        
+        ancestry: 父类分类信息
+        ancestry_depth: 分类类别
   role:
     :SUPER_ADMIN: "超级管理员"        
     :ADMIN:   "管理员"
@@ -109,7 +132,10 @@ zh-CN:
     :CATEGORY_LEVEL4: 四级分类            
   errors:
     messages:    
-      destroy_fails_if_lastone: 最后一个系统管理员不能被删除    
+      destroy_fails_if_lastone: 最后一个系统管理员不能被删除
+      destroy_fails_if_in_use:  "(子)模型-%{categoryname}-正在被使用"
+      destroy_fails_if_children_exist: "子节点-%{childname}-不能被删除"
+      component_category_destroy_fails: 删除%{categoryname}失败
   devise:
     failure:
       invalid: 登录名（用户名或邮箱）或密码错误  
@@ -209,7 +235,7 @@ zh-CN:
       help: "帮助"    
       associate_category_information: "相关分类信息" 
     scopes:
-      level1: 一级分类
-      level2: 二级分类      
-      level3: 三级分类
-      level4: 四级分类 
+      level0: 一级分类
+      level1: 二级分类      
+      level2: 三级分类
+      level3: 四级分类 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130304131924) do
+ActiveRecord::Schema.define(:version => 20130327031808) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -111,6 +111,18 @@ ActiveRecord::Schema.define(:version => 20130304131924) do
   end
 
   add_index "category4ths", ["category3rd_id"], :name => "index_category4ths_on_category3rd_id"
+
+  create_table "component_categories", :force => true do |t|
+    t.string   "name"
+    t.string   "comment"
+    t.string   "updated_by_email"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.string   "ancestry"
+    t.integer  "ancestry_depth",   :default => 0
+  end
+
+  add_index "component_categories", ["ancestry"], :name => "index_component_categories_on_ancestry"
 
   create_table "users", :force => true do |t|
     t.string   "name"

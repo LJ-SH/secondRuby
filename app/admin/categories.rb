@@ -49,15 +49,17 @@ ActiveAdmin.register Category do
 
   collection_action :category_select do
     @category_type = params[:category_type]
-    if COMPONENT_CATEGORY_DEFINITION.include?(@category_type.to_sym)
-      respond_to do |format|
-        format .js {render "category_select", :layout => false, :locals => {:form_selected => @category_type.downcase + "_form"}}
-      end
-    else 
-      respond_to do |format|
-        format .js {render "reset_category_select"}
-      end
-    end
+    #if COMPONENT_CATEGORY_DEFINITION.include?(@category_type.to_sym)
+    #  respond_to do |format|
+    #    format .js {render "category_select", :layout => false, :locals => {:form_selected => @category_type.downcase + "_form"}}
+    #  end
+    #else 
+    #  respond_to do |format|
+    #    format .js {render "reset_category_select"}
+    #  end
+    #end
+    @category = Category.new(:category_type => @category_type,:updated_by_email => current_admin_user.email)
+    render :partial => "new_category_form", :object => @category
   end
 
 	controller do 

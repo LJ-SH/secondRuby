@@ -8,6 +8,7 @@ class AddUserNameToAdminUsers < ActiveRecord::Migration
   end
 
   def self.down
+    remove_index :admin_users, :user_name
   	remove_column :admin_users, :user_name
   end  
 end
